@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANIFEST</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Quicksand:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-base: #fff8ef;
+  --bg-panel: #ffffff;
+  --bg-panel-soft: #fff1e6;
+  --pine: #1b4332;
+  --pine-deep: #123526;
+  --red: #d62828;
+  --red-soft: #ffe1e1;
+  --gold: #d99a2b;
+  --gold-soft: #fff1cf;
+  --text-primary: #2c2117;
+  --text-muted: #9c8a76;
+  --line: #f0ddc7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Quicksand', sans-serif;
+  min-height: 100vh;
+  padding: 32px 20px 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* gentle snowfall */
+.snowfall { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.flake {
+  position: absolute;
+  top: -10px;
+  color: var(--gold);
+  opacity: 0.55;
+  font-size: 14px;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh) translateX(10px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flake { animation: none; display: none; }
+}
+
+.wrap { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+
+/* candy cane stripe bar */
+.candy-stripe {
+  height: 10px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--red), var(--red) 10px,
+    #ffffff 10px, #ffffff 20px
+  );
+  border-radius: 6px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+}
+
+/* ===== HEADER ===== */
+header {
+  background: linear-gradient(180deg, var(--pine), var(--pine-deep));
+  border-radius: 0 0 18px 18px;
+  padding: 26px 24px 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 24px rgba(27,67,50,0.18);
+  position: relative;
+}
+
+.title-row { text-align: center; }
+h1 {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 44px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 0 var(--red);
+}
+.tagline {
+  font-size: 14px;
+  color: var(--gold-soft);
+  letter-spacing: 1px;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+/* ===== COUNTDOWN ===== */
+.countdown-wrap {
+  margin-top: 18px;
+  text-align: center;
+}
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 340px;
+  margin: 0 auto;
+}
+.cd-unit {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 8px 4px;
+}
+.cd-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold);
+}
+.cd-lbl {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.cd-caption {
+  font-size: 12px;
+  color: var(--gold-soft);
+  letter-spacing: 1px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+.cd-caption.today {
+  font-size: 16px;
+  color: #fff;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+.stat {
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  color: #fff;
+  margin-top: 4px;
+}
+
+/* ===== ADD FORM ===== */
+.add-panel {
+  border: 2px solid var(--line);
+  background: var(--bg-panel);
+  border-radius: 16px;
+  padding: 20px 20px 18px;
+  margin-bottom: 26px;
+  box-shadow: 0 4px 14px rgba(44,33,23,0.05);
+}
+.panel-label {
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--pine);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+input, select {
+  width: 100%;
+  background: var(--bg-panel-soft);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  color: var(--text-primary);
+  padding: 10px 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+}
+input::placeholder { color: var(--text-muted); font-weight: 500; }
+input:focus, select:focus { border-color: var(--red); }
+
+.priority-picker { display: flex; gap: 6px; grid-column: 1 / -1; }
+.priority-btn {
+  flex: 1;
+  background: var(--bg-panel-soft);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  color: var(--text-muted);
+  padding: 9px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+.priority-btn:hover { border-color: var(--text-muted); color: var(--text-primary); }
+.priority-btn.active[data-p="LOW"] { border-color: var(--pine); color: var(--pine); background: #e8f3ec; }
+.priority-btn.active[data-p="MED"] { border-color: var(--gold); color: #8a611b; background: var(--gold-soft); }
+.priority-btn.active[data-p="HIGH"] { border-color: var(--red); color: var(--red); background: var(--red-soft); }
+
+.add-btn {
+  grid-column: 1 / -1;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 2px;
+  box-shadow: 0 3px 0 #a31f1f;
+}
+.add-btn:hover { background: #e23f3f; }
+.add-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #a31f1f; }
+
+/* ===== LIST ===== */
+.list-label {
+  font-size: 15px;
+  color: var(--pine);
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-left: 2px;
+}
+
+.card {
+  position: relative;
+  border: 2px solid var(--line);
+  background: var(--bg-panel);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 16px;
+  align-items: center;
+  box-shadow: 0 3px 10px rgba(44,33,23,0.04);
+  border-left: 6px solid var(--pine);
+}
+.card.acquired { opacity: 0.55; border-left-color: var(--text-muted); }
+.card.acquired .item-name { text-decoration: line-through; }
+
+.item-name {
+  font-size: 19px;
+  font-weight: 700;
+  grid-column: 1;
+}
+.item-meta {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.item-price {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--red);
+  font-weight: 600;
+  font-size: 15px;
+}
+.item-link {
+  color: var(--pine);
+  text-decoration: none;
+  font-weight: 700;
+}
+.item-link:hover { text-decoration: underline; }
+.item-notes {
+  grid-column: 1;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.priority-bar {
+  grid-column: 1;
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+.seg { width: 22px; height: 5px; border-radius: 3px; background: var(--line); }
+.seg.on-LOW { background: var(--pine); }
+.seg.on-MED { background: var(--gold); }
+.seg.on-HIGH { background: var(--red); }
+
+.card-actions {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.action-btn {
+  background: var(--bg-panel-soft);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  color: var(--text-muted);
+  padding: 7px 12px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.action-btn.acquire { color: var(--pine); border-color: #cfe4d7; }
+.action-btn.acquire:hover { background: #e8f3ec; }
+.action-btn.remove { color: var(--red); border-color: #f5cfcf; }
+.action-btn.remove:hover { background: var(--red-soft); }
+
+.empty-state {
+  border: 2px dashed var(--line);
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--bg-panel);
+}
+.empty-state .glyph { font-size: 30px; margin-bottom: 10px; }
+
+.status-line {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-top: 20px;
+}
+
+.bottom-stripe { margin-top: 30px; }
+
+@media (max-width: 600px) {
+  body { padding: 20px 12px 70px; }
+  header { padding: 20px 16px 16px; border-radius: 0 0 14px 14px; }
+  h1 { font-size: 32px; }
+  .tagline { font-size: 12px; }
+  .countdown { max-width: 280px; gap: 6px; }
+  .cd-num { font-size: 18px; }
+  .cd-lbl { font-size: 9px; }
+  .stats-row { gap: 6px; margin-top: 14px; }
+  .stat { padding: 10px 4px; }
+  .stat-value { font-size: 16px; }
+  .stat-label { font-size: 9px; }
+  .add-panel { padding: 16px; border-radius: 14px; }
+  .form-grid { grid-template-columns: 1fr; }
+  input, select { font-size: 16px; padding: 12px; }
+  .priority-btn { padding: 12px 6px; font-size: 12px; }
+  .add-btn { padding: 14px; font-size: 15px; }
+  .card { grid-template-columns: 1fr; padding: 14px; }
+  .item-name { font-size: 17px; }
+  .card-actions { grid-column: 1; grid-row: auto; flex-direction: row; margin-top: 10px; width: 100%; }
+  .action-btn { flex: 1; padding: 10px 6px; text-align: center; }
+  .empty-state { padding: 30px 16px; }
+}
+
+*:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="snowfall" id="snowfall"></div>
+<div class="wrap">
+
+  <div class="candy-stripe"></div>
+  <header>
+    <div class="title-row">
+      <h1>🎄 MANIFEST 🎁</h1>
+      <div class="tagline">Santa's naughty-or-nice acquisition tracker</div>
+    </div>
+    <div class="countdown-wrap">
+      <div class="countdown" id="countdown">
+        <div class="cd-unit"><div class="cd-num" id="cd-days">00</div><div class="cd-lbl">Days</div></div>
+        <div class="cd-unit"><div class="cd-num" id="cd-hours">00</div><div class="cd-lbl">Hrs</div></div>
+        <div class="cd-unit"><div class="cd-num" id="cd-mins">00</div><div class="cd-lbl">Min</div></div>
+        <div class="cd-unit"><div class="cd-num" id="cd-secs">00</div><div class="cd-lbl">Sec</div></div>
+      </div>
+      <div class="cd-caption" id="cd-caption">until Christmas 🎅</div>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Items</div>
+        <div class="stat-value" id="stat-count">0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Total Value</div>
+        <div class="stat-value" id="stat-value">$0</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Acquired</div>
+        <div class="stat-value" id="stat-pct">0%</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="add-panel">
+    <div class="panel-label">🍬 Add to the List</div>
+    <div class="form-grid">
+      <input type="text" id="in-name" placeholder="Item name" maxlength="80">
+      <input type="number" id="in-price" placeholder="Price (optional)" min="0" step="0.01">
+      <input type="url" id="in-link" placeholder="Link (optional)" style="grid-column: 1 / -1;">
+      <input type="text" id="in-notes" placeholder="Notes (optional)" style="grid-column: 1 / -1;" maxlength="120">
+      <div class="priority-picker">
+        <button type="button" class="priority-btn" data-p="LOW">LOW</button>
+        <button type="button" class="priority-btn active" data-p="MED">MED</button>
+        <button type="button" class="priority-btn" data-p="HIGH">HIGH</button>
+      </div>
+      <button class="add-btn" id="add-btn">+ Add to Wishlist</button>
+    </div>
+  </div>
+
+  <div class="list-label">✨ Your List</div>
+  <div id="list"></div>
+  <div class="status-line" id="status-line">connecting...</div>
+  <div class="candy-stripe bottom-stripe"></div>
+
+</div>
+
+<script>
+let items = [];
+let selectedPriority = 'MED';
+const STORAGE_KEY = 'manifest:items';
+
+const listEl = document.getElementById('list');
+const statCount = document.getElementById('stat-count');
+const statValue = document.getElementById('stat-value');
+const statPct = document.getElementById('stat-pct');
+const statusLine = document.getElementById('status-line');
+
+// gentle snowfall decoration
+(function initSnow() {
+  const container = document.getElementById('snowfall');
+  const symbols = ['❄', '❅', '✦'];
+  const count = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 18;
+  for (let i = 0; i < count; i++) {
+    const f = document.createElement('div');
+    f.className = 'flake';
+    f.textContent = symbols[i % symbols.length];
+    f.style.left = Math.random() * 100 + 'vw';
+    f.style.fontSize = (10 + Math.random() * 10) + 'px';
+    f.style.animationDuration = (8 + Math.random() * 10) + 's';
+    f.style.animationDelay = (Math.random() * 10) + 's';
+    container.appendChild(f);
+  }
+})();
+
+// christmas countdown
+(function initCountdown() {
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minsEl = document.getElementById('cd-mins');
+  const secsEl = document.getElementById('cd-secs');
+  const captionEl = document.getElementById('cd-caption');
+  const countdownEl = document.getElementById('countdown');
+  const pad = n => String(n).padStart(2, '0');
+
+  function tick() {
+    const now = new Date();
+    if (now.getMonth() === 11 && now.getDate() === 25) {
+      countdownEl.style.display = 'none';
+      captionEl.textContent = "🎉 It's Christmas! 🎉";
+      captionEl.classList.add('today');
+      return;
+    }
+    let target = new Date(now.getFullYear(), 11, 25, 0, 0, 0);
+    if (now > target) target = new Date(now.getFullYear() + 1, 11, 25, 0, 0, 0);
+    const diff = target - now;
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+
+    daysEl.textContent = pad(days);
+    hoursEl.textContent = pad(hours);
+    minsEl.textContent = pad(mins);
+    secsEl.textContent = pad(secs);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+document.querySelectorAll('.priority-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedPriority = btn.dataset.p;
+  });
+});
+
+function priorityLevel(p) { return p === 'LOW' ? 1 : p === 'MED' ? 2 : 3; }
+
+function segBar(priority) {
+  const level = priorityLevel(priority);
+  let html = '<div class="priority-bar">';
+  for (let i = 0; i < 3; i++) {
+    html += `<div class="seg ${i < level ? 'on-' + priority : ''}"></div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+function render() {
+  statCount.textContent = items.length;
+  const total = items.reduce((sum, it) => sum + (parseFloat(it.price) || 0), 0);
+  statValue.textContent = '$' + total.toLocaleString(undefined, {maximumFractionDigits: 0});
+  const acquiredCount = items.filter(it => it.acquired).length;
+  statPct.textContent = items.length ? Math.round((acquiredCount / items.length) * 100) + '%' : '0%';
+
+  if (items.length === 0) {
+    listEl.innerHTML = `<div class="empty-state"><div class="glyph">🎁</div>Your list is empty. Add your first wish above!</div>`;
+    return;
+  }
+
+  const sorted = [...items].sort((a, b) => {
+    if (a.acquired !== b.acquired) return a.acquired ? 1 : -1;
+    return priorityLevel(b.priority) - priorityLevel(a.priority);
+  });
+
+  listEl.innerHTML = sorted.map(it => `
+    <div class="card ${it.acquired ? 'acquired' : ''}" data-id="${it.id}">
+      <div class="item-name">${escapeHtml(it.name)}</div>
+      <div class="item-meta">
+        ${it.price ? `<span class="item-price">$${parseFloat(it.price).toFixed(2)}</span>` : ''}
+        ${it.link ? `<a class="item-link" href="${escapeHtml(it.link)}" target="_blank" rel="noopener">VIEW LINK ↗</a>` : ''}
+      </div>
+      ${it.notes ? `<div class="item-notes">${escapeHtml(it.notes)}</div>` : ''}
+      ${segBar(it.priority)}
+      <div class="card-actions">
+        <button class="action-btn acquire" data-action="toggle" data-id="${it.id}">${it.acquired ? 'UN-WRAP' : '🎁 GOT IT'}</button>
+        <button class="action-btn remove" data-action="remove" data-id="${it.id}">REMOVE</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function loadItems() {
+  try {
+    const result = await window.storage.get(STORAGE_KEY, false);
+    items = result ? JSON.parse(result.value) : [];
+    statusLine.textContent = '';
+  } catch (e) {
+    items = [];
+    statusLine.textContent = '';
+  }
+  render();
+}
+
+async function saveItems() {
+  try {
+    const result = await window.storage.set(STORAGE_KEY, JSON.stringify(items), false);
+    statusLine.textContent = result ? '' : 'save failed — changes may not persist';
+  } catch (e) {
+    statusLine.textContent = 'save failed — changes may not persist';
+  }
+}
+
+document.getElementById('add-btn').addEventListener('click', async () => {
+  const nameEl = document.getElementById('in-name');
+  const priceEl = document.getElementById('in-price');
+  const linkEl = document.getElementById('in-link');
+  const notesEl = document.getElementById('in-notes');
+
+  const name = nameEl.value.trim();
+  if (!name) { nameEl.focus(); return; }
+
+  items.push({
+    id: 'item_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+    name,
+    price: priceEl.value ? parseFloat(priceEl.value) : null,
+    link: linkEl.value.trim(),
+    notes: notesEl.value.trim(),
+    priority: selectedPriority,
+    acquired: false
+  });
+
+  nameEl.value = '';
+  priceEl.value = '';
+  linkEl.value = '';
+  notesEl.value = '';
+  nameEl.focus();
+
+  render();
+  await saveItems();
+});
+
+listEl.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.action-btn');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const action = btn.dataset.action;
+
+  if (action === 'toggle') {
+    const it = items.find(i => i.id === id);
+    if (it) it.acquired = !it.acquired;
+  } else if (action === 'remove') {
+    items = items.filter(i => i.id !== id);
+  }
+  render();
+  await saveItems();
+});
+
+loadItems();
+</script>
+</body>
+</html>
